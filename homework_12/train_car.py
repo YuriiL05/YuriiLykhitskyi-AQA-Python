@@ -6,6 +6,7 @@ class TrainCar:
         self.__train_car_number = train_car_number
         self.__places_number = places_number
         self.__places = {number: None for number in range(1, places_number + 1)}
+        self.__tickets = []
 
     def __len__(self):
         return len([k for k, v in self.__places.items() if v is not None])
@@ -31,15 +32,28 @@ class TrainCar:
                 self.__places[place] = new_passenger
                 break
 
+    def add_passenger_by_station(self, station: str):
+        for passenger in self.__tickets:
+            if passenger.boarding_station == station:
+                self.add_passenger(passenger)
+                print(f'Passenger: {passenger.full_name} boarded the train at the station: {station}')
+
     def add_passenger_to_place(self, new_passenger: Passenger, place: int):
         if place in self.__places and self.__places[place] is None:
             self.__places[place] = new_passenger
 
-    def remove_passenger_by_station(self, station):
+    def remove_passenger_by_station(self, station: str):
         for place, passenger in self.__places.items():
-            if passenger and passenger.destination == station:
+            if passenger is not None and passenger.destination == station:
                 self.__places[place] = None
-                break
+                print(f'Passenger: {passenger.full_name} left the train at the station: {station}')
 
     def remove_all_passengers(self):
         self.__places = {number: None for number in range(1, self.__places_number)}
+
+    def add_tickets(self, passenger: Passenger):
+        self.__tickets.append(passenger)
+
+    def handle_passengers_at_station(self, station):
+        self.add_passenger_by_station(station)
+        self.remove_passenger_by_station(station)
