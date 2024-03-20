@@ -20,5 +20,5 @@ def test_marker_promotion(home):
 
 def test_open_bestseller_fist_product(home):
     first_product_name = home.get_bestseller_first_product_name()
-    home.open_first_product_bestseller()
-    assert first_product_name == home.get_opened_product_name()
+    opened_product = home.open_first_product_bestseller()
+    assert first_product_name == opened_product.get_product_name()

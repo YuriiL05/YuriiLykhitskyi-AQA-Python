@@ -12,5 +12,7 @@ class MobilePhonesLocators(BaseLocators):
             'locator_clear_filter': '//*[@id="clear_filter"]',
             'locator_filter_brand_apple':
                 '//*[@id="filter_bar"]//div[text()="Бренд"]/following-sibling::div/label[text()=" Apple"]/input',
-            'locator_first_product_name': '//*[@id="products_list"]/div[1]/a[@class="name"]'
+            'locator_first_product_name': '//*[@id="products_list"]/div[1]/a[@class="name"]',
+            'locator_list_view': '//*[@id="sortbar"]//a[text()="Список"]',
+            'locator_title_view': '//*[@id="sortbar"]//a[text()="Плитка"]'
         }

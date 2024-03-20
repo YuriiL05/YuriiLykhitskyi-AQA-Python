@@ -1,6 +1,7 @@
 from selenium.webdriver import Keys
 from homework_16.core import MobilePhonesLocators
 from homework_16.pages.base_page import BasePage
+from homework_16.pages.product_page import ProductPage
 
 
 class MobilePhonesPage(BasePage):
@@ -43,5 +44,16 @@ class MobilePhonesPage(BasePage):
 
     def get_first_product_name(self):
         return self.find_wait_for_presence_of_element(self.locators.locator_first_product_name).text
+
+    def open_first_product(self):
+        self.click_element(self.locators.locator_first_product_name)
+        return ProductPage(self.driver)
+
+    def switch_view_to_list(self):
+        self.click_element(self.locators.locator_list_view)
+
+    def is_list_view_active(self) -> bool:
+        switch_button = self.find_wait_for_presence_of_element(self.locators.locator_list_view)
+        return switch_button.get_attribute('class') == 'view_list sel'
 
 
