@@ -3,6 +3,7 @@ from selenium.webdriver import Chrome
 
 from homework_16.pages.home_page import HomePage
 from homework_16.pages.mobile_phones_page import MobilePhonesPage
+from homework_16.pages.product_page import ProductPage
 
 
 @pytest.fixture
@@ -23,4 +24,10 @@ def home(driver):
 def phones(driver):
     driver.get('https://compservice.in.ua/catalogue/59-mobilni-telefoni.html')
     yield MobilePhonesPage(driver)
+
+
+@pytest.fixture
+def iphone_14_256_midnight(driver):
+    driver.get('https://compservice.in.ua/product/5224991.html')
+    yield ProductPage(driver)
 

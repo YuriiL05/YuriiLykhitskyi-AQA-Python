@@ -26,3 +26,9 @@ def test_clear_filter(phones):
     assert phones.is_clear_filter_absent()
 
 
+def test_navigate_from_home_and_switch_to_list(home):
+    phones_page = home.navigate_to_phones_page()
+    phones_page.switch_view_to_list()
+    assert phones_page.is_list_view_active()
+
+
