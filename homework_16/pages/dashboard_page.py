@@ -1,13 +1,13 @@
 from selenium.webdriver import Keys
-from homework_16.core import MobilePhonesLocators
+from homework_16.core import DashboardLocators
 from homework_16.pages.base_page import BasePage
 from homework_16.pages.product_page import ProductPage
 
 
-class MobilePhonesPage(BasePage):
+class DashboardPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
-        self.locators = MobilePhonesLocators()
+        self.locators = DashboardLocators()
 
     def get_name_of_page(self) -> str:
         return self.find_wait_for_presence_of_element(self.locators.locator_naming_page).text
@@ -37,9 +37,9 @@ class MobilePhonesPage(BasePage):
     def is_clear_filter_absent(self) -> bool:
         return self.is_element_invisible(self.locators.locator_clear_filter)
 
-    def set_filter_brand_apple(self):
-        filter_brand_apple_element = self.find_wait_for_clickable_element(self.locators.locator_filter_brand_apple)
-        filter_brand_apple_element.click()
+    def set_filter_brand(self, brand):
+        filter_brand_element = self.find_wait_for_clickable_element(self.locators.get_filter_by_brand_locator(brand))
+        filter_brand_element.click()
         self.wait_element_refreshed(self.locators.locator_first_product_name)
 
     def get_first_product_name(self):

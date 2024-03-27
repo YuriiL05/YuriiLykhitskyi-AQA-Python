@@ -82,3 +82,9 @@ class ProductPage(BasePage):
     def send_telephone_number_buy_in_click(self):
         self.click_element(self.locators.locator_button_buy_in_click)
 
+    def get_product_code(self):
+        return self.find_wait_for_presence_of_element(self.locators.locator_product_code).text
+
+    def is_product_in_stock(self):
+        return self.find_wait_for_presence_of_element(self.locators.locator_in_stock).get_attribute('class') == 'yes'
+

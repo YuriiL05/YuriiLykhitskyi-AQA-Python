@@ -20,7 +20,9 @@ class ProductLocators(BaseLocators):
             'locator_add_to_compare': '//*[@id="content"]//a[text()="порівняти"]',
             'locator_open_compare': '//*[@id="sidebar_compare"]//a[@class="compare"]',
             'locator_tel_number_buy_in_click': '//*[@id="content"]/div/div[3]/form/input[1]',
-            'locator_button_buy_in_click': '//*[@id="content"]//form/input[@value="Купити"]'
+            'locator_button_buy_in_click': '//*[@id="content"]//form/input[@value="Купити"]',
+            'locator_product_code': '//*[@id="content"]/div/div[@class="code"]/span',
+            'locator_in_stock': '//*[@id="content"]//div[@class="in_stock"]/div'
         }
 
     def get_characteristic_locator(self, character: str) -> tuple[str, str]:

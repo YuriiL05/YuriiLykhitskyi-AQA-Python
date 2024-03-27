@@ -2,7 +2,7 @@ from selenium.common import TimeoutException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-from homework_16.core import BaseLocators
+from homework_16.core import BaseLocators, CookieService, LocalStorageService
 
 
 class BasePage:
@@ -11,6 +11,8 @@ class BasePage:
         self.wait = WebDriverWait(self.driver, wait_time)
         self.actions = ActionChains(self.driver)
         self.base_locators = BaseLocators()
+        self.cookies_service = CookieService(self.driver)
+        self.local_storage_service = LocalStorageService(self.driver)
 
     def find_wait_for_presence_of_element(self, locator):
         return self.wait.until(EC.presence_of_element_located(locator))
@@ -77,6 +79,19 @@ class BasePage:
     def is_error_popup_visible(self):
         return self.is_element_visible(self.base_locators.locator_error_popup)
 
-    def navigate_to_phones_page(self):
-        self.click_element(self.base_locators.locator_phones_tablets)
-        self.click_element(self.base_locators.locator_phones)
+    def get_recently_viewed_cookie_list(self) -> list:
+        self.cookies_service.read_and_store_all_cookies()
+        return self.cookies_service.get_stored_cookie_by_name('recently_viewed')['value'].split('%2C')
+
+    def get_local_storage_value_by_key(self, key: str) -> str:
+        return self.local_storage_service.get_item(key)
+
+    def navigate_to(self, name):
+        locator_type, nav_locators = self.base_locators.get_navigation_locator(name)
+        for locator in nav_locators:
+            self.click_element((locator_type, locator))
+
+    def search_product(self, name: str):
+        search_field = self.find_wait_for_presence_of_element(self.base_locators.locator_search_input)
+        search_field.send_keys(name)
+        self.click_element(self.base_locators.locator_search_submit)
