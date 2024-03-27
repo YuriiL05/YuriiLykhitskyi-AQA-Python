@@ -42,7 +42,7 @@ def test_add_to_compare(iphone_14_256_midnight):
 def test_open_compare_page(phones):
     first_phone = phones.open_first_product()
     first_phone.add_product_to_compare()
-    first_phone.navigate_to_phones_page()
+    first_phone.navigate_to('phones')
     phones.set_filter_brand_apple()
     phones.set_filter_max_price(20000)
     another_phone = phones.open_first_product()
@@ -57,3 +57,10 @@ def test_buy_iphone_in_one_click_error(phones):
     iphone.add_telephone_number_buy_in_click()
     iphone.send_telephone_number_buy_in_click()
     assert iphone.is_error_popup_visible()
+
+
+@pytest.mark.parametrize('products', ['phones', 'tablets', 'laptops'])
+def test_first_product_on_dashboard_is_available(home, dashboard, product, products):
+    home.navigate_to(products)
+    dashboard.open_first_product()
+    assert product.is_product_in_stock()

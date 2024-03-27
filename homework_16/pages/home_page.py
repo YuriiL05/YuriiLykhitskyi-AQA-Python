@@ -1,6 +1,5 @@
 from homework_16.core import HomeLocators
 from homework_16.pages.base_page import BasePage
-from homework_16.pages.mobile_phones_page import MobilePhonesPage
 from homework_16.pages.product_page import ProductPage
 
 
@@ -38,8 +37,9 @@ class HomePage(BasePage):
     def get_bestseller_first_product_name(self):
         return self.find_wait_for_presence_of_element(self.locators.locator_bestseller_first_product).text
 
-    def navigate_to_phones_page(self):
-        self.click_element(self.base_locators.locator_phones_tablets)
-        self.click_element(self.base_locators.locator_phones)
-        return MobilePhonesPage(self.driver)
+    def is_cookie_present_by_name(self, cookie_name):
+        self.cookies_service.read_and_store_all_cookies()
+        return self.cookies_service.get_stored_cookie_by_name(cookie_name) is not None
+
+
 
