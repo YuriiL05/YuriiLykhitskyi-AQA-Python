@@ -1,4 +1,4 @@
-from passenger import Passenger
+from homework_12.passenger import Passenger
 
 
 class TrainCar:
