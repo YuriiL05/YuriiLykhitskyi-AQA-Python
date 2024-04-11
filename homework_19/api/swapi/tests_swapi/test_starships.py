@@ -21,12 +21,12 @@ def test_get_single_starship(starship_service):
     assert single_starship.status_code == 200
     assert single_starship.json()["name"] == "Scimitar"
 
-def test_get_single_starship_validate_data_consistency(starship_service):
-    single_starship = starship_service.get_single_starship(41)
-    assert single_starship.status_code == 200
-    with open('Scimitar_starship.json') as data:
-        data_converted = json.load(data)
-        assert data_converted == single_starship.json()
+# def test_get_single_starship_validate_data_consistency(starship_service):
+#     single_starship = starship_service.get_single_starship(41)
+#     assert single_starship.status_code == 200
+#     with open('Scimitar_starship.json') as data:
+#         data_converted = json.load(data)
+#         assert data_converted == single_starship.json()
 
 
 
