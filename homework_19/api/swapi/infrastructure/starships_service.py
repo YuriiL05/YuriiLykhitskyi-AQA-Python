@@ -1,5 +1,5 @@
 from requests import get
-from homework_19.api.swapi import config
+from ..conf import config
 import json
 
 class StarshipService:

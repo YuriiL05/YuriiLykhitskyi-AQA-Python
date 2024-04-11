@@ -1,5 +1,5 @@
 import pytest
-from homework_19.api.swapi import StarshipService
+from ..infrastructure import StarshipService
 
 
 @pytest.fixture
