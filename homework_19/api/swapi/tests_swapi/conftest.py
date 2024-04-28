@@ -1,7 +1,13 @@
 import pytest
-from ..infrastructure import StarshipService
+from homework_19.api.swapi import StarshipsService
+from homework_19.api.swapi import VehiclesService
 
 
 @pytest.fixture
 def starship_service():
-    yield StarshipService()
+    yield StarshipsService()
+
+
+@pytest.fixture
+def vehicle_service():
+    yield VehiclesService()
